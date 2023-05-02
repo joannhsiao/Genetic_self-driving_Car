@@ -271,7 +271,7 @@ if __name__ == "__main__":
 				end = car.move(network, ax)
 				if end == "completed":
 					scores[p] += 100
-					arrive_gene = genes[p]
+					arrive_gene = np.copy(genes[p])
 					with open("genes.txt", "a") as f:
 						f.write(str(genes[p]) + "\n")
 					break
@@ -294,10 +294,12 @@ if __name__ == "__main__":
 
 		print("[{}], mean score: {}".format(i, sum(scores)/len(scores)))
 	
+	print(arrive_gene==None)
 	if arrive_gene != None:
 		network = rbf(arrive_gene, input_dim, rbfn_k)
 	else:
-		network = rbf(genes[np.where(scores==max(scores))[0][0]], input_dim, rbfn_k)
+		index = np.where(scores==max(scores))[0][0]
+		network = rbf(genes[index], input_dim, rbfn_k)
 	car.reset()
 	car.init_path()
 
