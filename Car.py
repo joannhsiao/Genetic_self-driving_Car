@@ -294,11 +294,10 @@ if __name__ == "__main__":
 
 		print("[{}], mean score: {}".format(i, sum(scores)/len(scores)))
 	
-	print(arrive_gene==None)
-	if arrive_gene != None:
+	if isinstance(arrive_gene, np.ndarray):
 		network = rbf(arrive_gene, input_dim, rbfn_k)
 	else:
-		index = np.where(scores==max(scores))[0][0]
+		index = no.where(scores==max(scores))[0][0]
 		network = rbf(genes[index], input_dim, rbfn_k)
 	car.reset()
 	car.init_path()
