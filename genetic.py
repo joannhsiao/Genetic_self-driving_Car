@@ -25,7 +25,7 @@ class genetic():
         self.gene_pool = np.array(self.gene_pool)
 
     def crossover(self, crossover_rate):
-        # farer: 
+        # farther: 
         # x1 = x1 + sigma * (x1 - x2)
         # x2 = x2 - sigma * (x1 - x2)
         sigma = random.random()

@@ -3,6 +3,7 @@ from matplotlib.patches import Circle, Rectangle
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import math
+import os
 from matplotlib import animation
 from rbf import *
 from genetic import *
@@ -127,17 +128,6 @@ class Car():
 			
 	def collision(self):
 		for i in range(len(self.wall_x)-1):
-		# 	x1, y1 = self.wall_x[i], self.wall_y[i]
-		# 	x2, y2 = self.wall_x[i+1], self.wall_y[i+1]
-
-		# 	line_length = self.cal_distance(x1, y1, x2, y2)
-		# 	numerator = abs((y2-y1)*self.x - (x2-x1)*self.y + x2*y1 - y2*x1)
-		# 	denominator = self.cal_distance(x1, y1, x2, y2)
-		# 	distance = numerator / denominator
-
-		# 	if distance <= self.radius and ((distance > 0 and distance < line_length) or self.radius*2 >= line_length):
-		# 	    return True
-		# return False
 			a, b, c = self.getLine(self.wall_x[i], self.wall_y[i], self.wall_x[i+1], self.wall_y[i+1])
 			# L' = bx-ay+c1=0
 			a1, b1 = b, -a
@@ -262,6 +252,10 @@ if __name__ == "__main__":
 	genes = np.random.randn(gene_group, gene_size)
 	arrive_gene = None
 
+	filename = "genes.txt"
+	if os.path.exists(filename):
+		os.remove(filename)
+
 	iteration = 40
 	for i in range(iteration):
 		scores = np.zeros(gene_group)
@@ -272,7 +266,7 @@ if __name__ == "__main__":
 				if end == "completed":
 					scores[p] += 100
 					arrive_gene = np.copy(genes[p])
-					with open("genes.txt", "a") as f:
+					with open(filename, "a") as f:
 						f.write(str(genes[p]) + "\n")
 					break
 				elif end == "collision":
