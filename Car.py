@@ -245,7 +245,7 @@ if __name__ == "__main__":
 	car.draw_path(ax)
 
 	# init genes, genes=(k*dim + 2*k + 1, )
-	gene_group = 1000
+	gene_group = 300
 	rbfn_k = 5
 	input_dim = 3
 	gene_size = rbfn_k * input_dim + 2* rbfn_k + 1
@@ -291,7 +291,7 @@ if __name__ == "__main__":
 	if isinstance(arrive_gene, np.ndarray):
 		network = rbf(arrive_gene, input_dim, rbfn_k)
 	else:
-		index = no.where(scores==max(scores))[0][0]
+		index = np.where(scores==max(scores))[0][0]
 		network = rbf(genes[index], input_dim, rbfn_k)
 	car.reset()
 	car.init_path()
