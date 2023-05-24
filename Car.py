@@ -245,7 +245,7 @@ if __name__ == "__main__":
 	car.draw_path(ax)
 
 	# init genes, genes=(k*dim + 2*k + 1, )
-	gene_group = 300
+	gene_group = 500
 	rbfn_k = 5
 	input_dim = 3
 	gene_size = rbfn_k * input_dim + 2* rbfn_k + 1
